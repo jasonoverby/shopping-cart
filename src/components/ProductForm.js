@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 class ProductForm extends Component {
   state = {
     fields: {
-      title: '',
-      quantity: '',
-      price: '',
+      id: this.props.id || '',
+      title: this.props.title || '',
+      quantity: this.props.quantity || '',
+      price: this.props.price || '',
     }
   }
 
@@ -21,6 +22,12 @@ class ProductForm extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
+    this.props.onButtonClick();
+  };
+
+  handleUpdate = (e) => {
+    e.preventDefault();
+    this.props.onUpdateInventory(this.state.fields);
     this.props.onButtonClick();
   };
 
@@ -69,7 +76,9 @@ class ProductForm extends Component {
           </div>
 
           <div className="actions form-actions">
-            <a className="button" onClick={this.handleSubmit}>Add</a>
+            {this.state.fields.id ?
+              <a className="button" onClick={this.handleUpdate}>Update</a> :
+              <a className="button" onClick={this.handleSubmit}>Add</a>}
             <a className="button" onClick={this.handleClick}>Cancel</a>
           </div>
         </form>

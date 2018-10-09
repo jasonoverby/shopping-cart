@@ -4,7 +4,12 @@ import EditableProduct from './EditableProduct.js'
 class ProductList extends Component {
   render() {
     const list = this.props.products.map((product) => {
-      return <EditableProduct key={product.id} { ...product } add={this.props.add} />;
+      return <EditableProduct
+        key={product.id}
+        { ...product }
+        onUpdateInventory={this.props.onUpdateInventory}
+        addToCart={this.props.addToCart}
+      />;
     });
 
     return(

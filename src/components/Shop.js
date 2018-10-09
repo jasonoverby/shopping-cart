@@ -19,6 +19,20 @@ class Shop extends Component {
     },
   };
 
+  handleUpdateInventory = (updatedProduct) => {
+    const products = this.state.DATA.map((product) => {
+      if (updatedProduct.id === product.id) {
+        return updatedProduct;
+      } else {
+        return product;
+      }
+    });
+
+    this.setState({
+      DATA: products,
+    });
+  };
+
   handleAddInventory = (newProduct) => {
     newProduct.id = nextProductId;
     nextProductId += 1;
@@ -28,7 +42,7 @@ class Shop extends Component {
     });
   };
 
-  handleAddToCart (item_id) {
+  handleAddToCart = (item_id) => {
     const newCart = Object.assign({}, this.state.cart);
     const newData = this.state.DATA.map(p => Object.assign({}, p));
     const product = newData.find(p => p.id === item_id);
@@ -47,23 +61,27 @@ class Shop extends Component {
     // decrement quantity in product list
     product.quantity --;
     this.setState({DATA: newData});
-  }
+  };
 
-  handleCheckout (e) {
+  handleCheckout = (e) => {
     e.preventDefault();
     this.setState({cart: {}});
-  }
+  };
 
   render() {
     return (
       <div id="app">
         <header>
           <h1>The Shop!</h1>
-          <Cart items={this.state.cart} checkout={this.handleCheckout.bind(this)}/>
+          <Cart items={this.state.cart} checkout={this.handleCheckout}/>
         </header>
 
         <main>
-          <ProductList products={this.state.DATA} add={this.handleAddToCart.bind(this)} />
+          <ProductList
+            products={this.state.DATA}
+            addToCart={this.handleAddToCart}
+            onUpdateInventory={this.handleUpdateInventory}
+          />
           <ToggleableProductForm onAddInventory={this.handleAddInventory}/>
         </main>
       </div>
