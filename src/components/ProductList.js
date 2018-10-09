@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import EditableProduct from './EditableProduct.js'
 
 class ProductList extends Component {
-  render() {
+  render() {    
+    const list = this.props.products.map((product) => {
+      return <EditableProduct key={product.id} { ...product } add={this.props.add} />;
+    });
+   
     return(
       <div className="product-listing">
         <h2>Products</h2>
-        <EditableProduct />
-        <EditableProduct />
-        <EditableProduct />
+        {list}
       </div>
     );
   }

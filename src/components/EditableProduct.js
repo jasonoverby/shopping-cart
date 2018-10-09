@@ -3,11 +3,11 @@ import Product from './Product.js';
 import ProductForm from './ProductForm.js';
 
 class EditableProduct extends Component {
-  render() {
+  render() {   
     return(
       <div className="product">
         <div className="product-details">
-          <Product />
+          <Product  { ...this.props }/>
           <a className="delete-button"><span>X</span></a>
         </div>
         <ProductForm />
