@@ -3,6 +3,7 @@ import Cart from './Cart.js';
 import ProductList from './ProductList.js';
 import ProductForm from './ProductForm.js';
 import DATA from '../lib/data.js';
+import ToggleableProductForm from './ToggleableProductForm.js'
 
 class Shop extends Component {
   state = {
@@ -52,7 +53,7 @@ class Shop extends Component {
 
         <main>
           <ProductList products={this.state.DATA} add={this.handleAddToCart.bind(this)} />
-          <ProductForm />
+          <ToggleableProductForm />
         </main>
       </div>
     );

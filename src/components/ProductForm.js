@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
 class ProductForm extends Component {
+  handleClick = (e) => {
+    e.preventDefault();
+    this.props.onButtonClick();
+  }
+
   render() {
-    return(
+    return (
       <div className="add-form">
-        <p><a className="button add-product-button">Add A Product</a></p>
         <h3>Add Product</h3>
         <form>
           <div className="input-group">
@@ -24,7 +28,7 @@ class ProductForm extends Component {
 
           <div className="actions form-actions">
             <a className="button">Add</a>
-            <a className="button">Cancel</a>
+            <a className="button" onClick={this.handleClick}>Cancel</a>
           </div>
         </form>
       </div>

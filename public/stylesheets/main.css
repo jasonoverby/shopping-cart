@@ -154,9 +154,9 @@ input[type="text"]:focus {
   border-color: #07575b;
 }
 
-.add-form h3, .add-form form {
-  display: none;
-}
+/* .add-form h3, .add-form form { */
+  /* display: none; */
+/* } */
 
 .add-form.visible .add-product-button {
   display: none;
