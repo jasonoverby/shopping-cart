@@ -5,6 +5,8 @@ import ProductForm from './ProductForm.js';
 import DATA from '../lib/data.js';
 import ToggleableProductForm from './ToggleableProductForm.js'
 
+let nextProductId = 5;
+
 class Shop extends Component {
   state = {
     DATA,
@@ -17,24 +19,33 @@ class Shop extends Component {
     },
   };
 
-  handleAddToCart (item_id) { 
-    const newCart = Object.assign({}, this.state.cart); 
+  handleAddInventory = (newProduct) => {
+    newProduct.id = nextProductId;
+    nextProductId += 1;
+
+    this.setState({
+      DATA: DATA.concat(newProduct)
+    });
+  };
+
+  handleAddToCart (item_id) {
+    const newCart = Object.assign({}, this.state.cart);
     const newData = this.state.DATA.map(p => Object.assign({}, p));
     const product = newData.find(p => p.id === item_id);
-    
-    if (product.quantity <= 0) return;  
+
+    if (product.quantity <= 0) return;
     // increment/introduce value in cart
     if (newCart[item_id]) {
       newCart[item_id] = Object.assign({}, newCart[item_id]);
-      newCart[item_id].quantity ++;     
+      newCart[item_id].quantity ++;
     } else {
       newCart[item_id] = Object.assign({}, product);
       delete newCart[item_id].id;
-      newCart[item_id].quantity = 1;   
+      newCart[item_id].quantity = 1;
     };
     this.setState({ cart: newCart });
     // decrement quantity in product list
-    product.quantity --; 
+    product.quantity --;
     this.setState({DATA: newData});
   }
 
@@ -43,7 +54,7 @@ class Shop extends Component {
     this.setState({cart: {}});
   }
 
-  render() { 
+  render() {
     return (
       <div id="app">
         <header>
@@ -53,7 +64,7 @@ class Shop extends Component {
 
         <main>
           <ProductList products={this.state.DATA} add={this.handleAddToCart.bind(this)} />
-          <ToggleableProductForm />
+          <ToggleableProductForm onAddInventory={this.handleAddInventory}/>
         </main>
       </div>
     );
