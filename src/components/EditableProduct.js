@@ -13,6 +13,12 @@ class EditableProduct extends Component {
     })
   };
 
+  handleDelete = (e) => {
+    e.preventDefault();
+
+    this.props.onProductDelete(this.props.id);
+  };
+
   render() {
     return(
       <div className="product">
@@ -22,7 +28,7 @@ class EditableProduct extends Component {
             showForm={this.state.showForm}
             { ...this.props }
           />
-          <a className="delete-button"><span>X</span></a>
+          <a className="delete-button" onClick={this.handleDelete}><span>X</span></a>
         </div>
 
         {this.state.showForm ? <ProductForm onButtonClick={this.handleToggleForm} { ...this.props } /> : ''}

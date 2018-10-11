@@ -3,7 +3,7 @@ import CartItem from './CartItem.js';
 
 class Cart extends Component {
   render() {
-    const cartItems = [];    
+    const cartItems = [];
     for (let id in this.props.items) {
       cartItems.push(<CartItem key={id} { ...this.props.items[id] } />)
     }
@@ -39,7 +39,7 @@ class Cart extends Component {
         <p>Total: $0</p>
         <a onClick={this.props.checkout} className="button disabled checkout">Checkout</a>
       </div>
-    ); 
+    );
   }
 }
 

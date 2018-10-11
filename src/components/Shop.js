@@ -68,6 +68,14 @@ class Shop extends Component {
     this.setState({cart: {}});
   };
 
+  handleProductDelete = (productId) => {
+    const products =  this.state.DATA.filter((product) => {
+      return product.id !== productId;
+    });
+
+    this.setState({ DATA: products });
+  };
+
   render() {
     return (
       <div id="app">
@@ -81,6 +89,7 @@ class Shop extends Component {
             products={this.state.DATA}
             addToCart={this.handleAddToCart}
             onUpdateInventory={this.handleUpdateInventory}
+            onProductDelete={this.handleProductDelete}
           />
           <ToggleableProductForm onAddInventory={this.handleAddInventory}/>
         </main>

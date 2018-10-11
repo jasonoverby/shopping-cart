@@ -78,7 +78,7 @@ class ProductForm extends Component {
           <div className="actions form-actions">
             {this.state.fields.id ?
               <a className="button" onClick={this.handleUpdate}>Update</a> :
-              <a className="button" onClick={this.handleSubmit}>Add</a>}
+              <a className="button" id='add' onClick={this.handleSubmit}>Add</a>}
             <a className="button" onClick={this.handleClick}>Cancel</a>
           </div>
         </form>

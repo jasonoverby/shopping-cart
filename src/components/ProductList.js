@@ -7,6 +7,7 @@ class ProductList extends Component {
       return <EditableProduct
         key={product.id}
         { ...product }
+        onProductDelete={this.props.onProductDelete}
         onUpdateInventory={this.props.onUpdateInventory}
         addToCart={this.props.addToCart}
       />;
