@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Product from './Product.js';
 import ProductForm from './ProductForm.js';
+import store from '../store.js'
 
 class EditableProduct extends Component {
   state = {
@@ -13,10 +14,9 @@ class EditableProduct extends Component {
     })
   };
 
-  handleDelete = (e) => {
-    e.preventDefault();
-
-    this.props.onProductDelete(this.props.id);
+  deleteProduct = (e) => {
+    e.preventDefault();   
+    store.dispatch({ type: 'DELETE', productId: this.props.id });
   };
 
   render() {
@@ -28,7 +28,7 @@ class EditableProduct extends Component {
             showForm={this.state.showForm}
             { ...this.props }
           />
-          <a className="delete-button" onClick={this.handleDelete}><span>X</span></a>
+          <a className="delete-button" onClick={this.deleteProduct}><span>X</span></a>
         </div>
 
         {this.state.showForm ? <ProductForm onButtonClick={this.handleToggleForm} { ...this.props } /> : ''}

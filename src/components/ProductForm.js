@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import store from '../store.js';
 
 class ProductForm extends Component {
   state = {
@@ -25,15 +26,23 @@ class ProductForm extends Component {
     this.props.onButtonClick();
   };
 
+  update = () => {
+    store.dispatch({ type: 'UPDATE', ...this.state.fields });
+  };
+
   handleUpdate = (e) => {
     e.preventDefault();
-    this.props.onUpdateInventory(this.state.fields);
+    this.update();
     this.props.onButtonClick();
   };
 
-  handleSubmit = (e) => {
+  create = () => {
+    store.dispatch({ type: 'CREATE', ...this.state.fields });
+  }
+
+  handleCreate = (e) => {
     e.preventDefault();
-    this.props.onAddInventory(this.state.fields);
+    this.create();
     this.props.onButtonClick();
   };
 
@@ -78,7 +87,7 @@ class ProductForm extends Component {
           <div className="actions form-actions">
             {this.state.fields.id ?
               <a className="button" onClick={this.handleUpdate}>Update</a> :
-              <a className="button" id='add' onClick={this.handleSubmit}>Add</a>}
+              <a className="button" id='add' onClick={this.handleCreate}>Add</a>}
             <a className="button" onClick={this.handleClick}>Cancel</a>
           </div>
         </form>

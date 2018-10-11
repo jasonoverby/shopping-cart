@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import EditableProduct from './EditableProduct.js'
+import EditableProduct from './EditableProduct.js';
+import store from '../store.js';
 
 class ProductList extends Component {
+
+
   render() {
-    const list = this.props.products.map((product) => {
+    const products = store.getState().DATA;
+    const list = products.map((product) => {
       return <EditableProduct
         key={product.id}
         { ...product }
-        onProductDelete={this.props.onProductDelete}
-        onUpdateInventory={this.props.onUpdateInventory}
-        addToCart={this.props.addToCart}
       />;
     });
 
@@ -23,3 +24,6 @@ class ProductList extends Component {
 }
 
 export default ProductList;
+/*onProductDelete={this.props.onProductDelete}
+        onUpdateInventory={this.props.onUpdateInventory}
+        addToCart={this.props.addToCart}*/
